@@ -172,8 +172,10 @@ if uploaded_file is not None:
                         f"{top3_probs[i]*100:.1f}%", va='center', fontsize=10)
                 
                 # 棒グラフ（最下端）にラベルとタイトル表示
-                ax.set_xlabel("確率")
-                ax.set_title("上位3クラス（予測分布）")
+                #ax.set_xlabel("確率")
+                ax.set_xlabel("Probability")
+                #ax.set_title("上位3クラス（予測分布）")
+                ax.set_title("Top 3 classes (prediction distribution)")
                 plt.gca().invert_yaxis()  # 上位を上に表示
                 st.pyplot(fig)
 
@@ -209,8 +211,10 @@ if uploaded_file is not None:
             
             fig, ax = plt.subplots()
             ax.bar(class_names, probs.numpy())
-            ax.set_ylabel("確率")
-            ax.set_title("分類確率（予測分布）")
+            #ax.set_ylabel("確率")
+            ax.set_ylabel("Probability")
+            #ax.set_title("分類確率（予測分布）")
+            ax.set_title("Classification probability(predictive distribution)")
             plt.xticks(rotation=45, ha="right")
             st.pyplot(fig)
             log_entry = {
