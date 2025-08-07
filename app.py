@@ -214,7 +214,7 @@ if uploaded_file is not None:
             #ax.set_ylabel("確率")
             ax.set_ylabel("Probability")
             #ax.set_title("予測分布")
-            ax.set_title("Classification probability(predictive distribution)")
+            ax.set_title("predictive distribution")
             plt.xticks(rotation=45, ha="right")
             st.pyplot(fig)
             log_entry = {
