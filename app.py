@@ -213,7 +213,7 @@ if uploaded_file is not None:
             ax.bar(class_names, probs.numpy())
             #ax.set_ylabel("確率")
             ax.set_ylabel("Probability")
-            #ax.set_title("分類確率（予測分布）")
+            #ax.set_title("予測分布")
             ax.set_title("Classification probability(predictive distribution)")
             plt.xticks(rotation=45, ha="right")
             st.pyplot(fig)
