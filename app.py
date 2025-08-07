@@ -10,7 +10,7 @@ import pandas as pd
 from datetime import datetime
 
 # 日本語フォント設定（Windows用）
-rcParams['font.family'] = 'DejaVu Sans'  # 'Meiryo' ot 'MS Gothic'
+rcParams['font.family'] = 'Meiryo'  # 'Meiryo' ot 'MS Gothic' or 'DejaVu Sans'
 
 # ランク別カラー定義（1位: 金, 2位: 銀, 3位: 銅）
 rank_colors = ['gold', 'silver', '#cd7f32']  # ブロンズは HEXで指定
