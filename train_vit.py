@@ -50,6 +50,7 @@ transform_valid = transforms.Compose([
 train_dataset = ImageDataset("train.csv", transform=transform_train)
 valid_dataset = ImageDataset("valid.csv", transform=transform_valid)
 
+# batchサイズは軽めにしてメモリ不可を抑える（batch_size=8～16）
 train_loader = DataLoader(train_dataset, batch_size=8, shuffle=True)
 valid_loader = DataLoader(valid_dataset, batch_size=8, shuffle=False)
 
@@ -57,6 +58,7 @@ valid_loader = DataLoader(valid_dataset, batch_size=8, shuffle=False)
 # モデル
 # ================================
 device = torch.device("cpu")
+# vit_base_patch16_224 ではなく vit_small_patch16_224の方が学習が早くなる
 model = timm.create_model("vit_small_patch16_224", pretrained=True)
 model.head = nn.Linear(model.head.in_features, len(train_dataset.classes))
 model = model.to(device)
