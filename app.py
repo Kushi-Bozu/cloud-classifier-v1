@@ -181,7 +181,7 @@ if uploaded_file is not None:
 
             pred_label = class_names[pred_class]
             
-            st.success(f"予測結果: {class_names[pred_class]}")
+            # st.success(f"予測結果: {class_names[pred_class]}")
             
             # 和名・特徴・高度分類をカード風表示
             # if pred_label in cloud_info:
