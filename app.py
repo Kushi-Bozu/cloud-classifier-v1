@@ -141,7 +141,7 @@ if uploaded_file is not None:
             col1, col2 = st.columns(2)
 
             with col1:
-                st.success(f"予測結果: {pred_label}")
+            #    st.success(f"予測結果: {pred_label}")
                 if pred_label in cloud_info:
                     info = cloud_info[pred_label]
                     card_html = f"""
