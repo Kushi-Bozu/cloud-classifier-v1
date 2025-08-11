@@ -102,6 +102,11 @@ def load_model():
 
 model, class_names = load_model()
 
+# サイドバー：非雲フィルタのしきい値
+st.sidebar.header("設定")
+threshold = st.sidebar.slider("雲判定のしきい値（トップ確率）", 0.0, 1.0, 0.60, 0.01)
+st.sidebar.write(f"現在のしきい値: {threshold:.2f}")
+
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
     transforms.ToTensor(),
@@ -126,13 +131,24 @@ if uploaded_file is not None:
                 outputs = model(img_tensor)
                 probs = torch.softmax(outputs, dim=1)[0]
                 pred_class = torch.argmax(probs).item()
-                
-            # 予測クラスと確率を取得
-            pred_label = class_names[pred_class]
-            probs = torch.softmax(outputs, dim=1)[0]
-            prob_values = probs.numpy()
             
+                # 予測クラスと確率を取得
+                image = Image.open(uploaded_file).convert("RGB")
+                input_tensor = transform(image).unsqueeze(0)
+                outputs = model(input_tensor)
+                probs = torch.nn.functional.softmax(outputs[0], dim=0)
+                
+                #1位の確率とクラス
+                pred_prob, pred_idx = torch.max(probs, dim=0)
+                pred_label = class_names[pred_idx]
+            
+                # 非雲判定
+                if pred_prob.item() < threshold:
+                    st.warning("雲の画像ではありません。")
+                    st.stop()
+                
             # 上位3クラス抽出
+            prob_values = probs.detach().numpy() 
             top3_idx = prob_values.argsort()[-3:][::-1]
             top3_labels = [class_names[i] for i in top3_idx]
             top3_probs = prob_values[top3_idx]
