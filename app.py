@@ -102,10 +102,10 @@ def load_model():
 
 model, class_names = load_model()
 
-# サイドバー：非雲フィルタのしきい値
+# サイドバー：非雲フィルタの閾値
 st.sidebar.header("設定")
-threshold = st.sidebar.slider("雲判定のしきい値（トップ確率）", 0.0, 1.0, 0.60, 0.01)
-st.sidebar.write(f"現在のしきい値: {threshold:.2f}")
+threshold = st.sidebar.slider("雲判定の閾値（トップ確率）", 0.0, 1.0, 0.60, 0.01)
+st.sidebar.write(f"現在の閾値: {threshold:.2f}")
 
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
